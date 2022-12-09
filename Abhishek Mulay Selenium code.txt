@@ -1,0 +1,120 @@
+question 3 ->
+
+
+
+package PO;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class question3 {
+
+	WebDriverManager.chromedriver.setup();
+	WebDriver driver = new ChromeDriver();
+	driver.get("https://www.nopcommerce.com/en");
+	driver.manage().window().maximize();
+	
+	WebElement usericon = driver.findElement(By.xpath("(//ul[@class='navigation-top-menu navigation-top-menu-user-actions'])/li[3]"));
+	WebElement register = driver.findElement(By.xpath("((//ul[@class='navigation-top-menu-sublist'])[6]/li)[2]"));
+	Actions action = new Actions(driver);
+	
+	action.moveToElement(usericon); 
+	Thread.sleep(3000);
+	action.click(register).build().perform(); 
+	Thread.sleep(3000);
+}
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+
+question 4 -> 
+
+
+
+package PO;
+
+import java.io.File;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class question4 {
+	
+		WebDriverManager.chromedriver.setup();
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://www.nopcommerce.com/en");
+		driver.manage().window().maximize();
+		
+		WebElement usericon = driver.findElement(By.xpath("(//ul[@class='navigation-top-menu navigation-top-menu-user-actions'])/li[3]"));
+		WebElement register_mainpage = driver.findElement(By.xpath("((//ul[@class='navigation-top-menu-sublist'])[6]/li)[2]"));
+		Actions action = new Actions(driver);
+		
+		action.moveToElement(usericon);
+		Thread.sleep(3000);
+		action.click(register_mainpage).build().perform();
+		Thread.sleep(3000);
+		
+		
+
+		WebElement firstName = driver.findElement(By.xpath("//input[@id='FirstName']"));
+		WebElement lastName = driver.findElement(By.xpath("//input[@id='LastName']"));
+		WebElement email = driver.findElement(By.xpath("//input[@id='Email']"));
+		WebElement confirm_email = driver.findElement(By.xpath("//input[@Id='ConfirmEmail']"));
+		WebElement user_Name = driver.findElement(By.xpath("//input[@id='Username']"));
+		WebElement check_avail = driver.findElement(By.xpath("id=\"check-availability-button\""));
+
+		Select country = new Select(driver.findElement(By.xpath("(//select[@name='CountryId'])[1]")));  
+		Select time_zone = new Select(driver.findElement(By.xpath("//select[@id='TimeZoneId']")));
+		WebElement password = driver.findElement(By.xpath("//input[@id='Password']"));
+		WebElement confirm_password = driver.findElement(By.xpath("//input[@id='ConfirmPassword']"));
+		
+		Select my_cmp_primarily = new Select(driver.findElement(By.xpath("//select[@id=\"Details_CompanyIndustryId\"]")));
+		
+		WebElement register = driver.findElement(By.xpath("id=\"register-button\""));
+		
+		
+		firstName.sendKeys("abhi");
+		Thread.sleep(2000);
+		lastName.sendKeys("mulay");
+		Thread.sleep(2000);
+		email.sendKeys("abhishekmulay124@gamil.com");
+		Thread.sleep(2000);
+		confirm_email.sendKeys("abhishekmulay124@gamil.com");
+		Thread.sleep(2000);
+		user_Name.sendKeys("abhishek_24567");
+		Thread.sleep(2000);
+		check_avail.click();
+		Thread.sleep(2000);
+		country.selectByVisibleText("India");
+		Thread.sleep(2000);
+		time_zone.selectByVisibleText("(UTC-08:00) Pacific Time (US & Canada)");
+		Thread.sleep(2000);
+		password.sendKeys("hello1234");
+		Thread.sleep(2000);
+		confirm_password.sendKeys("hello1234");
+		Thread.sleep(2000);
+		my_cmp_primarily.selectByVisibleText("I am student");	
+		Thread.sleep(2000);		
+		register.click();
+	
+		File screenShotFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		
+		FileUtils.copyFile(screenShotFile, new File(".//Screenshots/screen.png"));
+		driver.quit();
+	
+	
+}
